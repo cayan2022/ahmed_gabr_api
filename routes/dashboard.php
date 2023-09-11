@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Dashboard\{
     PartnerController,
     ServiceController,
     SettingController,
+    SocialLinkController,
     ProfileController,
     CustomerController,
     CategoryController,
@@ -178,6 +179,13 @@ Route:: as('dashboard.')
                     Route::post('{setting}/update', [SettingController::class, 'update'])->name('update')->middleware('can:update settings');
                     Route::get('{setting}', [SettingController::class, 'show'])->name('show');
                 });
+            /*SocialLinks*/
+            Route::as('social_links.')
+                ->prefix('social_links')
+                ->group(function () {
+                Route::post('{social_link}/update', [SocialLinkController::class, 'update'])->name('update')->middleware('can:update settings');
+                Route::get('{social_link}', [SocialLinkController::class, 'show'])->name('show');
+            });
             /*Orders*/
             Route::group([], function () {
                 /*Export Orders in excel sheet*/

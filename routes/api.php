@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Site\{
     AboutController,
     BranchController,
     SettingController,
+    SocialLinkController,
     SourceController,
     TestimonialController,
     TidingController,
@@ -51,6 +52,7 @@ Route:: as('site.')
         Route::get('projects', ProjectController::class)->name('projects');
         Route::get('tidings', TidingController::class)->name('tidings');
         Route::get('settings/{setting}', SettingController::class)->name('settings');
+        Route::get('social_links/{social_link}', SocialLinkController::class)->name('social_links');
         Route::post('settings/click/register', [SettingController::class, 'clickRegister'])->name('settings.click.register');
         Route::post('order', OrderController::class)->name('order.store');
         Route::get('portfolio-categories', PortfolioCategoryController::class)->name('portfolio-categories');
