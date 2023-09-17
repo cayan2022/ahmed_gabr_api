@@ -119,7 +119,7 @@ class DoctorController extends Controller
         if ($type == 'store' && $request->order_doctor_id == null) {
             $doctor_order = Doctor::where('order', '!=', null)->orderBy('order', 'DESC')->first();
 
-            $doctor->order = $doctor_order->order + 1;
+            $doctor->order = $doctor_order!=null ? $doctor_order->order + 1 : 1;
             $doctor->save();
         } elseif ($type == 'store' && $request->order_doctor_id != null) {
             $old_doctor_order = Doctor::where('id', $request->order_doctor_id)->first();
