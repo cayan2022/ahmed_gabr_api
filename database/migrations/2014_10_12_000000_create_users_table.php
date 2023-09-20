@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->foreignId('country_id')->constrained()->cascadeOnUpdate();
             $table->string('phone')->unique();
             $table->enum('type', User::TYPES)->default(User::MODERATOR);
