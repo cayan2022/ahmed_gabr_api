@@ -112,4 +112,11 @@ class OfferController extends Controller
         $offer->active();
         return $this->success(__('auth.success_operation'));
     }
+
+
+    public function deleteMedia($id)
+    {
+        \DB::table('media')->where('id', $id)->delete();
+        return $this->success(__('auth.success_operation'));
+    }
 }

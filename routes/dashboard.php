@@ -97,6 +97,7 @@ Route:: as('dashboard.')
                 Route::put('offers/{offer}/active', [OfferController::class, 'active'])->name('offers.active')->middleware('can:active offers');
                 Route::post('offers/{offer}', [OfferController::class, 'update'])->name('offers.update')->middleware('can:update offers');
                 Route::apiResource('offers', OfferController::class)->except('update')->middleware('check_permissions');
+                Route::get('delete_media/{id}',[OfferController::class, 'deleteMedia']);
             });
             /*Services*/
             Route::group([], function () {
