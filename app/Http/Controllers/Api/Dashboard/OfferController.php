@@ -16,6 +16,7 @@ use Illuminate\Http\Response;
 class OfferController extends Controller
 {
     use RespondsWithHttpStatus;
+
     /**
      * Display a listing of the resource.
      *
@@ -29,16 +30,18 @@ class OfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreOfferRequest  $request
+     * @param StoreOfferRequest $request
      * @return Response
      */
     public function store(StoreOfferRequest $request)
     {
-        $offer=Offer::create($request->validated());
-        if($request->hasFile('image') && $request->file('image')->isValid()){
-            $offer->addMediaFromRequest('image')
-                ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
-                ->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
+        $offer = Offer::create($request->validated());
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $offer->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->sanitizingFileName(fn($fileName) => updateFileName($fileName))
+                        ->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
+                });
         }
         return $offer->getResource();
 
@@ -47,7 +50,7 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Offer  $offer
+     * @param Offer $offer
      * @return OfferResource
      */
     public function show(Offer $offer)
@@ -58,21 +61,22 @@ class OfferController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateOfferRequest  $request
-     * @param  Offer  $offer
+     * @param UpdateOfferRequest $request
+     * @param Offer $offer
      * @return OfferResource
      */
     public function update(UpdateOfferRequest $request, Offer $offer)
     {
         $offer->update($request->validated());
 
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $offer->clearMediaCollection(Offer::MEDIA_COLLECTION_NAME);
-            $offer->addMediaFromRequest('image')
-                ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
-                ->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
+            $offer->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->sanitizingFileName(fn($fileName) => updateFileName($fileName))
+                        ->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
+                });
         }
-
         return $offer->getResource();
 
     }
@@ -80,7 +84,7 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Offer  $offer
+     * @param Offer $offer
      * @return Application|ResponseFactory|Response
      */
     public function destroy(Offer $offer)
@@ -90,7 +94,7 @@ class OfferController extends Controller
     }
 
     /**
-     * @param  Offer  $offer
+     * @param Offer $offer
      * @return Application|ResponseFactory|Response
      */
     public function block(Offer $offer)
@@ -100,7 +104,7 @@ class OfferController extends Controller
     }
 
     /**
-     * @param  Offer  $offer
+     * @param Offer $offer
      * @return Application|ResponseFactory|Response
      */
     public function active(Offer $offer)

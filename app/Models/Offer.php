@@ -47,6 +47,11 @@ class Offer extends Model implements HasMedia, TranslatableContract
         return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_NAME);
     }
 
+    public function getAllImages()
+    {
+        return $this->getMedia(self::MEDIA_COLLECTION_NAME);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection(self::MEDIA_COLLECTION_NAME)

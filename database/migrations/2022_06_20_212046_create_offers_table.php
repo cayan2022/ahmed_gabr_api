@@ -17,7 +17,7 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->double('price');
             $table->double('discount_percentage');
-            $table->longText('url');
+            $table->longText('url')->nullable();
             $table->boolean('is_block')->default(false);
             $table->timestamps();
         });
