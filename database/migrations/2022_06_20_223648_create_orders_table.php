@@ -24,6 +24,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('status_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('branch_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
+            $table->text('message')->nullable();
+
             $table->timestamps();
         });
     }

@@ -20,12 +20,12 @@ class OrderController extends Controller
     public function __invoke(CreateOrderRequest $createOrderRequest): OrderResource
     {
         $user = User::query()->withoutTrashed()
-            ->where(['phone' => $createOrderRequest->phone, 'email' => $createOrderRequest->email])
-            ->orWhere('phone', $createOrderRequest->phone)
-            ->orWhere('email', $createOrderRequest->email)
+//            ->where(['phone' => $createOrderRequest->phone, 'email' => $createOrderRequest->email])
+//            ->orWhere('phone', $createOrderRequest->phone)
+            ->where('email', $createOrderRequest->email)
             ->firstOr(function () use ($createOrderRequest) {
                 return User::create([
-                    'phone' => $createOrderRequest->phone,
+//                    'phone' => $createOrderRequest->phone,
                     'email' => $createOrderRequest->email,
                     'country_id' => Country::first()->id,
                     'name' => $createOrderRequest->name,
@@ -33,10 +33,13 @@ class OrderController extends Controller
                 ]);
             });
 
-        $user->update(['phone' => $createOrderRequest->phone, 'email' => $createOrderRequest->email]);
+        $user->update([
+//            'phone' => $createOrderRequest->phone,
+            'email' => $createOrderRequest->email
+        ]);
 
         $order = Order::create(
-            $createOrderRequest->only(['source_id', 'category_id', 'branch_id']) +
+            $createOrderRequest->only(['source_id', 'category_id', 'branch_id','message']) +
             [
                 'user_id' => $user->id,
                 'status_id' => Order::NEW

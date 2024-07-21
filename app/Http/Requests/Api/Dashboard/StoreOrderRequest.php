@@ -31,6 +31,7 @@ class StoreOrderRequest extends FormRequest
             'category_id' => 'required|integer|exists:categories,id',
             'status_id' => 'required|integer|exists:statuses,id',
             'branch_id' => 'required|integer|exists:branches,id',
+            'message' => 'nullable|string|max:99999'
         ];
     }
 }

@@ -25,6 +25,7 @@ class OrderResource extends JsonResource
             'user_avatar' => $this->user->getAvatar(),
             'source' => $this->source->name,
             'branch' => $this->branch->name,
+            'message' => $this->message,
             'last_employee' => $this->last_employee,
             'employee_avatar' => $this->employee_avatar,
             'created_at' => $this->created_at->diffForHumans(),
