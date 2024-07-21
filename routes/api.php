@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Site\{
     ProjectController,
     ServiceController,
     OfferController,
+    GalleryController,
     DoctorController,
     AboutController,
     BranchController,
@@ -43,6 +44,7 @@ Route:: as('site.')
         Route::get('branches', BranchController::class)->name('branches');
         Route::get('services', ServiceController::class)->name('services');
         Route::get('offers', OfferController::class)->name('offers');
+        Route::get('galleries', GalleryController::class)->name('galleries');
         Route::get('doctors', DoctorController::class)->name('doctors');
         Route::get('abouts', AboutController::class)->name('abouts');
         Route::get('branches', BranchController::class)->name('branches');
