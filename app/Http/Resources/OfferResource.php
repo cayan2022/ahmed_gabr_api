@@ -1,121 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Api\Dashboard;
+namespace App\Http\Resources;
 
-use App\Helpers\Traits\RespondsWithHttpStatus;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Dashboard\StoreOfferRequest;
-use App\Http\Requests\Api\Dashboard\UpdateOfferRequest;
-use App\Http\Resources\OfferResource;
-use App\Models\Offer;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class OfferController extends Controller
+class OfferResource extends JsonResource
 {
-    use RespondsWithHttpStatus;
     /**
-     * Display a listing of the resource.
+     * Transform the resource into an array.
      *
-     * @return AnonymousResourceCollection
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function index()
+    public function toArray($request)
     {
-        return OfferResource::collection(Offer::filter()->latest()->paginate());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  StoreOfferRequest  $request
-     * @return Response
-     */
-    public function store(StoreOfferRequest $request)
-    {
-        $offer=Offer::create($request->validated());
-        if ($request->hasFile('image')) {
-            // if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-            $offer->addMultipleMediaFromRequest(['image'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
-                });
-        }
-        return $offer->getResource();
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Offer  $offer
-     * @return OfferResource
-     */
-    public function show(Offer $offer)
-    {
-        return $offer->getResource();
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  UpdateOfferRequest  $request
-     * @param  Offer  $offer
-     * @return OfferResource
-     */
-    public function update(UpdateOfferRequest $request, Offer $offer)
-    {
-        $offer->update($request->validated());
-        // if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        if ($request->hasFile('image')){
-            $offer->clearMediaCollection(Offer::MEDIA_COLLECTION_NAME);
-            $offer->addMultipleMediaFromRequest(['image'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection(Offer::MEDIA_COLLECTION_NAME);
-                });
-        }
-
-        return $offer->getResource();
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Offer  $offer
-     * @return Application|ResponseFactory|Response
-     */
-    public function destroy(Offer $offer)
-    {
-        $offer->delete();
-        return $this->success(__('auth.success_operation'));
-    }
-
-    /**
-     * @param  Offer  $offer
-     * @return Application|ResponseFactory|Response
-     */
-    public function block(Offer $offer)
-    {
-        $offer->block();
-        return $this->success(__('auth.success_operation'));
-    }
-
-    /**
-     * @param  Offer  $offer
-     * @return Application|ResponseFactory|Response
-     */
-    public function active(Offer $offer)
-    {
-        $offer->active();
-        return $this->success(__('auth.success_operation'));
-    }
-
-    public function deleteMedia($id)
-    {
-        \DB::table('media')->where('id', $id)->delete();
-        return $this->success(__('auth.success_operation'));
+        return [
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'description'=>$this->description,
+            'price'=>$this->price,
+            'discount_percentage'=>$this->discount_percentage,
+            'url'=>$this->url,
+            'is_block'=>$this->is_block,
+            'image'=>$this->getAvatar(),
+            'translations'=> $this->getTranslationsArray()
+        ];
     }
 }
