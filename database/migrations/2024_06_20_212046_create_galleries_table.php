@@ -16,6 +16,8 @@ class CreateGalleriesTable extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_block')->default(false);
+            $table->string('link')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
 
@@ -24,7 +26,6 @@ class CreateGalleriesTable extends Migration
             $table->string('locale')->index();
             $table->string('title');
             $table->longText('description');
-            $table->string('type');
             $table->foreignId('gallery_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->unique(['gallery_id', 'locale']);
         });

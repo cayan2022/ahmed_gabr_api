@@ -18,9 +18,11 @@ class GalleryResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'description'=>$this->description,
-            'type'=>$this->type,
             'is_block'=>$this->is_block,
+            'type'=>$this->type,
+            'link'=>$this->link,
             'media'=>$this->getGallery(),
+            'cover'=>$this->getGallery(),
             'all_media'=>$this->getAllMediaGallery(),
             'translations'=> $this->getTranslationsArray()
         ];

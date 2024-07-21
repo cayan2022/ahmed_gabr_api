@@ -44,6 +44,11 @@ class Gallery extends Model implements HasMedia, TranslatableContract
         return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_NAME);
     }
 
+    public function getCover()
+    {
+        return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_NAME_COVER);
+    }
+
     public function getAllMediaGallery()
     {
         return $this->getMedia(self::MEDIA_COLLECTION_NAME);

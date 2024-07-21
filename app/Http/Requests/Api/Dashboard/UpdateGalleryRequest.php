@@ -28,9 +28,11 @@ class UpdateGalleryRequest extends FormRequest
     public function rules()
     {
         return RuleFactory::make([
-             '%title%' => ['required', 'string','max:255'],
-             '%description%' => ['required', 'string','max:255'],
-            'media' => ['nullable','mimetypes:image/*,video/*'],
+            '%title%' => ['required', 'string', 'max:255'],
+            '%description%' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'in:image,video'],
+            'link' => ['nullable', 'string'],
+            'media' => ['nullable', new SupportedImage()],
         ]);
     }
 }
