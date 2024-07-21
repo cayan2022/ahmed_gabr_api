@@ -30,7 +30,7 @@ class StoreOrderRequest extends FormRequest
             'source_id' => 'required|integer|exists:sources,id',
             'category_id' => 'required|integer|exists:categories,id',
             'status_id' => 'required|integer|exists:statuses,id',
-            'branch_id' => 'required|integer|exists:branches,id',
+            'branch_id' => 'nullable|integer|exists:branches,id',
             'message' => 'nullable|string|max:99999'
         ];
     }

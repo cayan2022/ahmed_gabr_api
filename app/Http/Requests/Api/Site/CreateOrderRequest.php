@@ -29,7 +29,7 @@ class CreateOrderRequest extends FormRequest
             'name' => 'required|string|max:255',
             'source_id' => 'required|integer|exists:sources,id',
             'category_id' => 'required|integer|exists:categories,id',
-            'branch_id'=>'required|integer|exists:branches,id',
+            'branch_id'=>'nullable|integer|exists:branches,id',
 //            'phone'=>['nullable',Rule::phone()->country(Country::query()->pluck('iso_code')->toArray())],
             'email'=>['required', 'email:rfc,dns'],
             'message' => 'nullable|string|max:99999',
