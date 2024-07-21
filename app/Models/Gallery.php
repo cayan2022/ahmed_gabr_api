@@ -4,8 +4,7 @@ namespace App\Models;
 
 use App\Http\Filters\Filterable;
 use App\Http\Filters\GalleryFilter;
-use App\Http\Filters\OfferFilter;
-use App\Http\Resources\OfferResource;
+use App\Http\Resources\GalleryResource;
 use App\Models\Traits\HasActivation;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
@@ -33,11 +32,11 @@ class Gallery extends Model implements HasMedia, TranslatableContract
 
     /*helpers*/
     /**
-     * @return OfferResource
+     * @return GalleryResource
      */
-    public function getResource(): OfferResource
+    public function getResource(): GalleryResource
     {
-        return new OfferResource($this->fresh());
+        return new GalleryResource($this->fresh());
     }
     public function getGallery()
     {
