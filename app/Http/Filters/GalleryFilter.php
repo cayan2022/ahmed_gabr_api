@@ -10,7 +10,7 @@ class GalleryFilter extends BaseFilters
      * @var array
      */
     protected $filters = [
-        'name'
+        'title'
     ];
 
     /**
@@ -24,9 +24,9 @@ class GalleryFilter extends BaseFilters
         if ($value) {
             return $this->builder
                 ->when(
-                    $this->request->filled('name'),
+                    $this->request->filled('title'),
                     function ($query) use ($value) {
-                        $query->whereTranslationLike('name','%'.$value.'%')
+                        $query->whereTranslationLike('title','%'.$value.'%')
                         ->orWhereTranslationLike('description','%'.$value.'%');
                     }
                 );

@@ -22,7 +22,7 @@ class GalleryResource extends JsonResource
             'type'=>$this->type,
             'link'=>$this->link,
             'media'=>$this->getGallery(),
-            'cover'=>$this->getGallery(),
+            'cover'=>$this->getCover(),
             'all_media'=>$this->getAllMediaGallery(),
             'translations'=> $this->getTranslationsArray()
         ];
