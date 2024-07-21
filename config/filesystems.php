@@ -96,6 +96,13 @@ return [
                 'jpg,jpeg,png,bmp,svg,webp'
             ))),
             'maxsize' => env('MAX_IMAGE_UPLOAD_SIZE',5000) //5 MB
+        ],
+        'videos' => [
+            'mimetypes' =>  explode(',', env('SUPPORTED_UPLOAD_IMAGE_TYPES', sprintf(
+                '%s',
+                'mp4,mov,ogg,qt,wav,flv'
+            ))),
+            'maxsize' => env('MAX_IMAGE_UPLOAD_SIZE',5000) //5 MB
         ]
     ]
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Dashboard;
 
 use App\Rules\SupportedImage;
+use App\Rules\SupportedVideo;
 use Astrotomic\Translatable\Validation\RuleFactory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,8 @@ class StoreServiceRequest extends FormRequest
              '%name%' => ['required', 'string','max:255'],
              '%description%' => ['required', 'string','max:255'],
              'category_id' => 'required|numeric|exists:categories,id',
-             'image' => ['nullable', new SupportedImage()]
+             'image' => ['nullable', new SupportedImage()],
+             'video' => ['nullable', new SupportedVideo()]
          ]);
     }
 }

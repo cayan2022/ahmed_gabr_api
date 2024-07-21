@@ -21,6 +21,7 @@ class ServiceResource extends JsonResource
             'translations'=> $this->getTranslationsArray(),
             'is_block'=>$this->is_block,
             'image'=>$this->getAvatar(),
+            'video'=>$this->getVideo(),
             'category'=>new CategoryResource($this->category),
         ];
     }

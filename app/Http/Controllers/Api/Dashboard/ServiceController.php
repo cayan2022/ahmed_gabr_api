@@ -41,6 +41,13 @@ class ServiceController extends Controller
                 ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
                 ->toMediaCollection(Service::MEDIA_COLLECTION_NAME);
         }
+
+        if($request->hasFile('video') && $request->file('video')->isValid()){
+            $service->addMediaFromRequest('video')
+                ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
+                ->toMediaCollection(Service::MEDIA_COLLECTION_VIDEO);
+        }
+
         return $service->getResource();
     }
 
@@ -71,6 +78,14 @@ class ServiceController extends Controller
                 ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
                 ->toMediaCollection(Service::MEDIA_COLLECTION_NAME);
         }
+
+        if($request->hasFile('video') && $request->file('video')->isValid()){
+            $service->clearMediaCollection(Service::MEDIA_COLLECTION_VIDEO);
+            $service->addMediaFromRequest('video')
+                ->sanitizingFileName(fn($fileName)=>updateFileName($fileName))
+                ->toMediaCollection(Service::MEDIA_COLLECTION_VIDEO);
+        }
+
         return $service->getResource();
     }
 

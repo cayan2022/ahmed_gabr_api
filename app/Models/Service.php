@@ -19,6 +19,7 @@ class Service extends Model implements   HasMedia,TranslatableContract
     use HasFactory ,InteractsWithMedia, Translatable , Filterable, HasActivation;
 
     public const MEDIA_COLLECTION_NAME = 'service_avatar';
+    public const MEDIA_COLLECTION_VIDEO = 'service_video';
     public const MEDIA_COLLECTION_URL = 'images/service.png';
     protected $fillable = [
         'category_id',
@@ -55,6 +56,11 @@ class Service extends Model implements   HasMedia,TranslatableContract
     public function getAvatar()
     {
         return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_NAME);
+    }
+
+    public function getVideo()
+    {
+        return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_VIDEO);
     }
 
     public function registerMediaCollections(): void
