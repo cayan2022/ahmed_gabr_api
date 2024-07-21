@@ -18,7 +18,7 @@ class Gallery extends Model implements HasMedia, TranslatableContract
     use HasFactory, InteractsWithMedia, Translatable, Filterable, HasActivation;
 
     protected $fillable = [
-        'is_block','type'
+        'is_block','type','link'
     ];
     protected $casts=[
         'is_block' => 'boolean',
