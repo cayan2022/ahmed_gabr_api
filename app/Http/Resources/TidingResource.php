@@ -20,7 +20,7 @@ class TidingResource extends JsonResource
             'description'=>$this->description,
             'short_description'=>$this->short_description,
             'date'=>$this->date,
-            'link'=>$this->link,
+            'link'=>$this->link??null,
             'translations'=> $this->getTranslationsArray(),
             'is_block'=>$this->is_block,
             'image'=>$this->getAvatar(),

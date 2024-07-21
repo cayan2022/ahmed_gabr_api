@@ -31,7 +31,7 @@ class StoreTidingRequest extends FormRequest
             '%description%' => ['required', 'string','max:300000000'],
             '%short_description%' => ['required', 'string','max:255'],
             'date' => 'required|date|date_format:Y-m-d',
-            'link'=> 'required|url',
+            'link'=> 'nullable|url',
             'image' => ['nullable', new SupportedImage()]
          ]);
     }
