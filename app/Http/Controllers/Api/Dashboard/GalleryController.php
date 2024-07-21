@@ -7,9 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Dashboard\StoreGalleryRequest;
 use App\Http\Requests\Api\Dashboard\UpdateGalleryRequest;
 use App\Http\Resources\GalleryResource;
-
 use App\Models\Gallery;
-use App\Models\Offer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
