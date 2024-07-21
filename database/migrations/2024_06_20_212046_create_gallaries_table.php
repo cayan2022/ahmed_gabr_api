@@ -38,7 +38,7 @@ class CreateGalleriesTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('offers');
-        Schema::dropIfExists('offer_translations');
+        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('gallery_translations');
     }
 }
