@@ -16,6 +16,6 @@ class ServiceController extends Controller
      */
     public function __invoke(): AnonymousResourceCollection
     {
-        return ServiceResource::collection(Service::whereIsActive()->filter()->latest()->paginate());
+        return ServiceResource::collection(Service::whereIsActive()->filter()->latest()->get());
     }
 }
