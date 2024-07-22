@@ -16,7 +16,8 @@ class Order extends Model
         'category_id',
         'source_id',
         'status_id',
-        'branch_id'
+        'branch_id',
+        'message'
     ];
 
     protected $appends = ['last_employee','employee_avatar'];
