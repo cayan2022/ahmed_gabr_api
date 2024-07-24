@@ -20,12 +20,12 @@ class OrderController extends Controller
     public function __invoke(CreateOrderRequest $createOrderRequest): OrderResource
     {
         $user = User::query()->withoutTrashed()
-//            ->where(['phone' => $createOrderRequest->phone, 'email' => $createOrderRequest->email])
-//            ->orWhere('phone', $createOrderRequest->phone)
+            ->where(['phone' => $createOrderRequest->phone, 'email' => $createOrderRequest->email])
+            ->orWhere('phone', $createOrderRequest->phone)
             ->where('email', $createOrderRequest->email)
             ->firstOr(function () use ($createOrderRequest) {
                 return User::create([
-//                    'phone' => $createOrderRequest->phone,
+                    'phone' => $createOrderRequest->phone,
                     'email' => $createOrderRequest->email,
                     'country_id' => Country::first()->id,
                     'name' => $createOrderRequest->name,
@@ -34,7 +34,7 @@ class OrderController extends Controller
             });
 
         $user->update([
-//            'phone' => $createOrderRequest->phone,
+            'phone' => $createOrderRequest->phone,
             'email' => $createOrderRequest->email
         ]);
 
