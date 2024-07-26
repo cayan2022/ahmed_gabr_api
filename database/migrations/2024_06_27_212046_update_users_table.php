@@ -15,7 +15,8 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Drop the unique constraint
-            $table->dropUnique(['email','phone']);
+            $table->dropUnique(['email']);
+            $table->dropUnique(['phone']);
         });
     }
 
