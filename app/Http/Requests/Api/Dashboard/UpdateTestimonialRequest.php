@@ -29,6 +29,7 @@ class UpdateTestimonialRequest extends FormRequest
             'user_name'=>'required|string|max:255',
             'comment'=>'required|string|max:255',
             'job'=>'required|string|max:255',
+            'link' => ['nullable', 'url'],
             'image' => ['nullable',new SupportedImage()]
         ];
     }

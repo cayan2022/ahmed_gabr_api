@@ -18,6 +18,7 @@ class CreateTestimonialsTable extends Migration
             $table->string('user_name');
             $table->longText('comment');
             $table->string('job');
+            $table->string('link')->nullable();
             $table->boolean('is_block')->default(false);
             $table->timestamps();
         });

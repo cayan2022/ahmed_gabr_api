@@ -19,6 +19,7 @@ class Testimonial extends Model implements HasMedia
         'user_name',
         'comment',
         'job',
+        'link',
         'is_block'
     ];
 
